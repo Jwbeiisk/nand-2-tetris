@@ -16,5 +16,10 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    // Put your code here:   
+    Inc16(in=o1,out=inc1);   //increments
+	Mux16(a=o1,b=inc1,sel=inc,out=o2); //selects either incremented or reset
+	Mux16(a=o2,b=in,sel=load,out=o3);  //selects either (either ior) or load
+	Mux16(a=o3,b=false,sel=reset,out=o4);	//selects either (either iorol) or reset
+	Register(in=o4,load=true,out=out,out=o1);  //previous output loops
 }
